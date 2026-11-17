@@ -51,14 +51,6 @@ SOC, V1, V2, temperature T, trip, and the previous pack voltage.
 Here I = I_pack / Np (per cell). OCV, R0, R1, C1, R2, C2 are 2-D lookups on temperature and SOC
 (`Lookup_*` blocks), from the +0.5C column of your LF105 maps (NaN entries filled, clipped outside the data).
 
-## Reference numbers (independent Python calculation, not MATLAB)
-| Case | Expected |
-|---|---|
-| `battery_dynamic_main` profile | SOC 80.0 to 74.26 %, V_pack 78.56 to 80.56 V, Tmax 25.49 degC, Imax 38.2 A, no trip |
-| 3 kW discharge at SOC 0.8, 25 degC | I 37.45 A, V_pack 79.57 V, delivered 2.98 kW |
-| 3 kW request at 0 degC | limited to 9.36 A, 0.75 kW |
-| 2 kW request at SOC 0.10 | discharge blocked (0 A), charging still allowed |
-| 3 kW pulse sag at 10 / 25 / 40 degC | 2.57 / 1.55 / 1.09 V |
 
 ## Assumptions and limits
 - Delivered power is a little different from the request at the first sample after a step (up to about
