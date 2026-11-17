@@ -70,3 +70,33 @@ Here I = I_pack / Np (per cell). OCV, R0, R1, C1, R2, C2 are 2-D lookups on temp
   measured data is still in-sample only.
 - Your vehicle cycle needs up to about 23 kW at the DC bus and returns about 12 kW in regeneration,
   far beyond this 3 kW battery; the fuel cell, ultracapacitor and EMS must supply the rest.
+
+
+## Organized Simulink diagram
+
+The top-level `battery_model.slx` layout has been reorganized into six functional
+columns while preserving the model equations and signal connections:
+
+1. Inputs and state memory
+2. ECM parameter maps
+3. Request conditioning and current limiting
+4. Battery electrical and thermal dynamics
+5. Protection and available power
+6. Logged outputs
+
+The layout is deliberately spacious, uses consistent block sizes and subtle
+function-based colors, and places section headings above each group. Signal
+connections are created only after blocks have been positioned, allowing
+Simulink's autorouter to route wires around the final layout.
+
+To regenerate the diagram with freshly autorouted connections from the MATLAB
+source files, run from this project folder:
+
+```matlab
+build_battery_model
+```
+
+The generator intentionally does not call `Simulink.BlockDiagram.arrangeSystem`
+because its automatic arrangement produced a cramped, difficult-to-follow
+diagram for this model. Layout changes are presentation-only; they do not
+change the battery equations, parameter maps, sample time, or signal logic.
